@@ -1,0 +1,61 @@
+<script src="~/Angular/Vendor/angular.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var app = angular.module('app', []);
+        app.controller('userController', ['$scope', 'userFactory', function ($scope, userFactory) {
+            $scope.users = [];
+            $scope.add = function () {
+
+                userFactory.getUsersList().success(function (data) {
+                    debugger;
+                    var d = data;
+                   
+                }).error(function (data) {
+                    $scope.error = "An Error has occured while Updating user! " + data.ExceptionMessage;
+                });
+
+
+            };
+
+
+        }]);
+
+        var url = "";
+        app.factory('userFactory', function ($http) {
+            return {
+                getUsersList: function () {
+                    url = "/POPUP/chget";
+                    return $http.post(url);
+                },
+                getUser: function (user) {
+                    url = baseAddress + "GetUser/" + user.UserId;
+                    return $http.get(url);
+                }
+
+
+            }
+        });
+
+    </script>
+
+//======================
+
+
+    <div ng-app="app">
+        <div ng-controller="userController">
+       
+            <input type="button" ng-click="add()" value="dddddd" />
+        </div>
+    </div>
+=====================================Class====
+
+  [OutputCache(Duration = 0)]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult chget()
+        {
+
+            mvc5Entities2 db = new mvc5Entities2();
+            var a = db.angcontrs.ToList();
+            //string Msg = ccls.challanoutvalidate(bill_no, c_date, country, "SIM", simno, AlotUser, sessid, branchcode, givento);
+            return Json(a, JsonRequestBehavior.AllowGet);
+        }
+

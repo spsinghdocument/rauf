@@ -1,0 +1,172 @@
+........DAL...class LoginDAL
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using EF_Layer.EF;
+namespace DataAccessLayer.DAL
+{
+    public class LoginDAL
+    {
+        AbhiEntities db;
+        public LoginDAL()
+        {
+            db = new AbhiEntities();
+        }
+        public User_Info UserValidateDal(string UserId,string Password,out string Msg)
+        {
+            User_Info ui = new User_Info();
+            Msg = string.Empty;
+            try
+            {
+                List<User_Info> UsrInf = db.User_Info.Where(u => u.Login_Id == UserId && u.Password
+                        == Password).ToList();
+                if (UsrInf.Count>0)
+                {
+                    ui = UsrInf[0];
+                }
+                else
+                {
+                    Msg = "User not exists..";
+                }
+            }
+            catch (Exception ex)
+            {
+                Msg = ex.Message;   
+            }
+            return ui;
+        }
+    }
+}
+
+...............Controller.....LoginController
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using DataAccessLayer.DAL;
+using EF_Layer.EF;
+namespace PresentationAccessLayer.Controllers
+{
+    public class LoginController : Controller
+    {
+        //
+        // GET: /Login/
+        LoginDAL LDal;
+        AbhiEntities db;
+        public LoginController()
+        {
+            db = new AbhiEntities();
+            LDal = new LoginDAL();
+        }
+        public ActionResult Index()
+        {
+            return View("vw_Login");
+        }
+
+        public JsonResult UserValidate(string userId,string password)
+        {
+            string Msg = string.Empty;
+           User_Info ui =LDal.UserValidateDal(userId, password,out Msg);
+           if (string.IsNullOrEmpty(Msg))
+           {
+               return Json(ui,JsonRequestBehavior.AllowGet);
+           }
+           else
+           {             
+              return Json(Msg, JsonRequestBehavior.AllowGet);               
+           }            
+        }
+    }
+}
+----------------Html-------------
+
+   <script type="text/javascript">
+        function login() {
+            var uid = $('#txtUserId').val();
+            var pwd = $('#txtPassword').val();
+            $.post("/Login/UserValidate", { userId: uid, password: pwd },
+            function (data) { chk(data); });
+        }
+        function chk(abc) {
+            debugger;
+        }
+    </script>
+
+
+============================================AND  SGTTECM ==================================================================================
+--------------------DAL--------------
+ public List<User_Name> LoginUserDal(string uname, string password)
+       {
+
+           return inv.User_Name.Where(em => em.User_Code == uname && em.Password == password).ToList();
+       }
+------------------------------------CONTROLLER-----------
+
+  [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult LoginValidate(string Ucode, string Password)
+        {         
+          List<User_Name> MstUsr = lcls.LoginUserDal(Ucode, Password);
+            foreach (var item in MstUsr)
+            {
+                System.Web.HttpContext.Current.Session["usercode"] = item.User_Code.Trim().ToUpper();
+                System.Web.HttpContext.Current.Session["usertype"] = item.UserType.Trim().ToUpper();
+                System.Web.HttpContext.Current.Session["branchcode"] = item.Branchcode.Trim().ToUpper();
+                System.Web.HttpContext.Current.Session["partnername"] = item.partnername.Trim().ToUpper();
+                System.Web.HttpContext.Current.Session["username"] = item.UserName.Trim().ToUpper();
+
+                System.Web.HttpContext.Current.Session["useremailid"] = item.emailid;
+                //StaticVariables.usercode = item.User_Code.Trim().ToUpper();
+                //StaticVariables.usertype = item.UserType.Trim().ToUpper();
+                //StaticVariables.partnername = item.partnername.Trim().ToUpper();
+                //StaticVariables.branchcode = item.partnername.Trim().ToUpper();
+                ViewBag.key= item.User_Code.Trim().ToUpper();
+            }
+            string Msg = string.Empty;
+          
+            try
+            {
+                if (MstUsr.Count > 0)
+                {                                      
+                    Session["UserId"] = MstUsr[0].UserName;                  
+                    Session["UserName"] = MstUsr[0].UserName;                  
+                    Msg = "User";
+                }
+                else
+                {                   
+                        Msg = "User and Password Invalid";
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Msg = ex.Message;
+            }
+            return Json(Msg, JsonRequestBehavior.AllowGet);
+          //  return Json(inv.User_Name.Where(em => em.User_Code == Ucode && em.Password == Password));
+        }
+-----------------------HTML--------
+
+  function UserCheck() {
+
+            var userId = $('#txtUserName').val();
+            var password = $('#txtPassword').val();
+            var url = '@Url.Action("LoginValidate", "Login")';
+            $.post(url, { Ucode: userId, Password: password }, function (data) { chk(data); }).error(function (data) { chk(data); });
+        }
+
+        function chk(abc) {
+
+            if (abc == "User and Password Invalid") {
+                alert(abc);
+                return false;
+            }
+            else {
+
+                var url = '@Url.Action("Index", "Home")';
+                document.location = url;
+                return false;
+            }
