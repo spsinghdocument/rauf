@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="mvc5Model1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="angcontr">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" />
+    <Property Name="MidName" Type="varchar" MaxLength="50" />
+    <Property Name="LastNmme" Type="varchar" MaxLength="50" />
+    <Property Name="FatherName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityContainer Name="mvc5Model1StoreContainer">
+    <EntitySet Name="angcontr" EntityType="Self.angcontr" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
