@@ -1,0 +1,29 @@
+https://www.google.com/settings/security/lesssecureapps
+
+=========================================================
+
+ try
+            {
+                MailMessage mail = new MailMessage();
+                mail.To.Add("spsinghdocument@gmail.com");
+                //mail.To.Add("spsinghdocument@gmail.com");
+                mail.From = new MailAddress("donotreplysansoft@gmail.com");
+                mail.Subject = "saurabh pratap singh";
+
+                mail.Body = "shalin pratap singh";
+
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com"; //Or Your SMTP Server Address
+                smtp.Credentials = new System.Net.NetworkCredential
+                     ("donotreplysansoft@gmail.com", "sansoft@123"); // ***use valid credentials***
+                smtp.Port = 587;
+
+                //Or your Smtp Email ID and Password
+                smtp.EnableSsl = true;
+                smtp.Send(mail);
+            }
+            catch (Exception ex)
+            {
+             Console.WriteLine("Exception in sendEmail:" + ex.Message);
+            }
