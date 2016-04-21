@@ -1,0 +1,28 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Index</title>
+    <script src="../../Scripts/jquery-1.5.1.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+
+        });
+
+        function show() {
+            $('#d1').load('/Emp/GetEmployee');
+         }
+    </script>
+</head>
+<body>
+    <input id="Button1" onclick="show();" type="button" value="button" />
+    <div id="d1">
+        
+    </div>
+</body>
+</html>

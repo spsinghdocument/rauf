@@ -1,0 +1,14 @@
+﻿
+<script language="javascript" >
+    $(document).ready(function () {
+        show();
+    });
+    function show() {
+        $.get('/Emp/showData', null, function (data) { chk(data); });
+    }
+
+    function chk(data) {
+        debugger;
+     }
+
+</script>
