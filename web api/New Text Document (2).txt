@@ -1,0 +1,121 @@
+[NotImplementeFilter].....
+[RoutePrefix("api/custom")]
+......
+[httpGet]
+[Route("")]
+public IHttpActionResult Weird()
+{
+
+return OK(new SimpleResponse("defaultGet"));
+}
+/////
+[httpGet]
+[Route("{id}")]
+
+///
+[httpGet]
+[Route("noImplemented")]
+public IHttpActionResult NottImplemented()
+{
+thrrow new NotImpledException();
+}
+
+///////////
+
+[httpGet]
+[Route("noImplemented/filter")]
+[NotImplementedFilter]
+public IHttpActionResult NottImplemented()
+{
+thrrow new NotImpledException("the filtr action isnt implemebt either");
+}
+//////////////
+[httpGet]
+[Route("noImplemented/exception")]
+[NotImplementedFilter]
+public IHttpActionResult NottImplemented()
+{
+thrrow new Exception("this is generic exception");
+}
+/////////
+[httpGet]
+[Route("noImplemented/explicit")]
+
+public IHttpActionResult NottImplementedExplicit()
+{
+thrrow BadReqest("not implemented ");
+}
+//----------------------------------------
+[Route("secured")]
+[Authorize]
+public IHttpActionResult GetAuth()
+{
+return OK (new
+{
+HttpContext.Current.User.Identity.IsAuthenticated,
+HttpContext.Current.User.Identity.Name
+}
+}
+
+
+chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/index.html[NotImplementeFilter].....
+[RoutePrefix("api/custom")]
+......
+[httpGet]
+[Route("")]
+public IHttpActionResult Weird()
+{
+
+return OK(new SimpleResponse("defaultGet"));
+}
+/////
+[httpGet]
+[Route("{id}")]
+
+///
+[httpGet]
+[Route("noImplemented")]
+public IHttpActionResult NottImplemented()
+{
+thrrow new NotImpledException();
+}
+
+///////////
+
+[httpGet]
+[Route("noImplemented/filter")]
+[NotImplementedFilter]
+public IHttpActionResult NottImplemented()
+{
+thrrow new NotImpledException("the filtr action isnt implemebt either");
+}
+//////////////
+[httpGet]
+[Route("noImplemented/exception")]
+[NotImplementedFilter]
+public IHttpActionResult NottImplemented()
+{
+thrrow new Exception("this is generic exception");
+}
+/////////
+[httpGet]
+[Route("noImplemented/explicit")]
+
+public IHttpActionResult NottImplementedExplicit()
+{
+thrrow BadReqest("not implemented ");
+}
+//----------------------------------------
+[Route("secured")]
+[Authorize]
+public IHttpActionResult GetAuth()
+{
+return OK (new
+{
+HttpContext.Current.User.Identity.IsAuthenticated,
+HttpContext.Current.User.Identity.Name
+}
+}
+
+
+chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/index.html

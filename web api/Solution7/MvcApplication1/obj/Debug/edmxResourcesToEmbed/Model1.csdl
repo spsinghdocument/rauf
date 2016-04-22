@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Inventory_MVC2Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="Inventory_MVC2Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="nodejs" EntityType="Inventory_MVC2Model.nodej" />
+  </EntityContainer>
+  <EntityType Name="nodej">
+    <Key>
+      <PropertyRef Name="MOBILENO" />
+    </Key>
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="LastName" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="MIDILENAME" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="MOBILENO" Type="Int32" Nullable="false" />
+    <Property Name="FATHERNAME" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+  </EntityType>
+</Schema>

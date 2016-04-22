@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Inventory_MVC2ModelStoreContainer" CdmEntityContainer="Inventory_MVC2Entities">
+    <EntitySetMapping Name="nodejs">
+      <EntityTypeMapping TypeName="Inventory_MVC2Model.nodej">
+        <MappingFragment StoreEntitySet="nodejs">
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MIDILENAME" ColumnName="MIDILENAME" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="MOBILENO" ColumnName="MOBILENO" />
+          <ScalarProperty Name="FATHERNAME" ColumnName="FATHERNAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
