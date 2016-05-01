@@ -1,0 +1,10 @@
+E:\Rauf\New folder\Solution2\BAL\bin\Debug\BAL.dll
+E:\Rauf\New folder\Solution2\BAL\bin\Debug\BAL.pdb
+E:\Rauf\New folder\Solution2\BAL\bin\Debug\DAL.dll
+E:\Rauf\New folder\Solution2\BAL\bin\Debug\Entity.dll
+E:\Rauf\New folder\Solution2\BAL\bin\Debug\DAL.pdb
+E:\Rauf\New folder\Solution2\BAL\bin\Debug\Entity.pdb
+E:\Rauf\New folder\Solution2\BAL\bin\Debug\EntityFramework.xml
+E:\Rauf\New folder\Solution2\BAL\obj\Debug\BAL.csprojResolveAssemblyReference.cache
+E:\Rauf\New folder\Solution2\BAL\obj\Debug\BAL.dll
+E:\Rauf\New folder\Solution2\BAL\obj\Debug\BAL.pdb

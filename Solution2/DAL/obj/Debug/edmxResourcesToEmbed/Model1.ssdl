@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Inventory_MVC2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ADDTARIF">
+    <Key>
+      <PropertyRef Name="SNO" />
+    </Key>
+    <Property Name="SNO" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TARIFF_CODE" Type="varchar" MaxLength="200" />
+    <Property Name="COUNTRY" Type="varchar" MaxLength="200" />
+    <Property Name="PLANTYPE" Type="varchar" MaxLength="100" />
+    <Property Name="CURRENCY" Type="varchar" MaxLength="100" />
+    <Property Name="CHARGESTYPE" Type="varchar" MaxLength="200" />
+    <Property Name="VALUE" Type="varchar" MaxLength="100" />
+    <Property Name="TALK_VALUE" Type="varchar" MaxLength="200" />
+    <Property Name="PERMINCHARGES" Type="varchar" MaxLength="100" />
+    <Property Name="VALIDITY_DAYS" Type="varchar" MaxLength="100" />
+    <Property Name="COUNTRY_FROM" Type="varchar" MaxLength="100" />
+    <Property Name="COUNTRY_TO" Type="varchar" MaxLength="100" />
+    <Property Name="A" Type="varchar" MaxLength="200" />
+    <Property Name="B" Type="varchar" MaxLength="200" />
+    <Property Name="C" Type="varchar" MaxLength="200" />
+    <Property Name="D" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <Function Name="mayank" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="sp" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="Inventory_MVC2ModelStoreContainer">
+    <EntitySet Name="ADDTARIF" EntityType="Self.ADDTARIF" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

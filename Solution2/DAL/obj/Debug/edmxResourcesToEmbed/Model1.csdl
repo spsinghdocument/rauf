@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Inventory_MVC2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ADDTARIF">
+    <Key>
+      <PropertyRef Name="SNO" />
+    </Key>
+    <Property Name="SNO" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TARIFF_CODE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="COUNTRY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="PLANTYPE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CURRENCY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CHARGESTYPE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="VALUE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="TALK_VALUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="PERMINCHARGES" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="VALIDITY_DAYS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="COUNTRY_FROM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="COUNTRY_TO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="A" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="B" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="C" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="D" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="Inventory_MVC2Entities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ADDTARIFs" EntityType="Self.ADDTARIF" />
+    <FunctionImport Name="mayank" ReturnType="Collection(Inventory_MVC2Model.mayank_Result)">
+      <Parameter Name="sp" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="mayank_Result">
+    <Property Type="Int64" Name="SNO" Nullable="false" />
+    <Property Type="String" Name="TARIFF_CODE" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="COUNTRY" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="PLANTYPE" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="CURRENCY" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="CHARGESTYPE" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="VALUE" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="TALK_VALUE" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="PERMINCHARGES" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="VALIDITY_DAYS" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="COUNTRY_FROM" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="COUNTRY_TO" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="A" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="B" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="C" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="D" Nullable="true" MaxLength="200" />
+  </ComplexType>
+</Schema>

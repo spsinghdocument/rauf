@@ -1,0 +1,5 @@
+E:\Rauf\New folder\Solution2\Entity\bin\Debug\Entity.dll
+E:\Rauf\New folder\Solution2\Entity\bin\Debug\Entity.pdb
+E:\Rauf\New folder\Solution2\Entity\obj\Debug\Entity.csprojResolveAssemblyReference.cache
+E:\Rauf\New folder\Solution2\Entity\obj\Debug\Entity.dll
+E:\Rauf\New folder\Solution2\Entity\obj\Debug\Entity.pdb

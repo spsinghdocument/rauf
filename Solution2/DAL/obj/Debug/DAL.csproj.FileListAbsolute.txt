@@ -1,0 +1,12 @@
+E:\Rauf\New folder\Solution2\DAL\bin\Debug\DAL.dll.config
+E:\Rauf\New folder\Solution2\DAL\bin\Debug\DAL.dll
+E:\Rauf\New folder\Solution2\DAL\bin\Debug\DAL.pdb
+E:\Rauf\New folder\Solution2\DAL\bin\Debug\Entity.dll
+E:\Rauf\New folder\Solution2\DAL\bin\Debug\EntityFramework.dll
+E:\Rauf\New folder\Solution2\DAL\bin\Debug\EntityFramework.SqlServer.dll
+E:\Rauf\New folder\Solution2\DAL\bin\Debug\Entity.pdb
+E:\Rauf\New folder\Solution2\DAL\bin\Debug\EntityFramework.xml
+E:\Rauf\New folder\Solution2\DAL\bin\Debug\EntityFramework.SqlServer.xml
+E:\Rauf\New folder\Solution2\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+E:\Rauf\New folder\Solution2\DAL\obj\Debug\DAL.dll
+E:\Rauf\New folder\Solution2\DAL\obj\Debug\DAL.pdb

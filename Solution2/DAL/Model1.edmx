@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Inventory_MVC2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ADDTARIF">
+          <Key>
+            <PropertyRef Name="SNO" />
+          </Key>
+          <Property Name="SNO" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TARIFF_CODE" Type="varchar" MaxLength="200" />
+          <Property Name="COUNTRY" Type="varchar" MaxLength="200" />
+          <Property Name="PLANTYPE" Type="varchar" MaxLength="100" />
+          <Property Name="CURRENCY" Type="varchar" MaxLength="100" />
+          <Property Name="CHARGESTYPE" Type="varchar" MaxLength="200" />
+          <Property Name="VALUE" Type="varchar" MaxLength="100" />
+          <Property Name="TALK_VALUE" Type="varchar" MaxLength="200" />
+          <Property Name="PERMINCHARGES" Type="varchar" MaxLength="100" />
+          <Property Name="VALIDITY_DAYS" Type="varchar" MaxLength="100" />
+          <Property Name="COUNTRY_FROM" Type="varchar" MaxLength="100" />
+          <Property Name="COUNTRY_TO" Type="varchar" MaxLength="100" />
+          <Property Name="A" Type="varchar" MaxLength="200" />
+          <Property Name="B" Type="varchar" MaxLength="200" />
+          <Property Name="C" Type="varchar" MaxLength="200" />
+          <Property Name="D" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <Function Name="mayank" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sp" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="Inventory_MVC2ModelStoreContainer">
+          <EntitySet Name="ADDTARIF" EntityType="Self.ADDTARIF" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Inventory_MVC2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ADDTARIF">
+          <Key>
+            <PropertyRef Name="SNO" />
+          </Key>
+          <Property Name="SNO" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TARIFF_CODE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="COUNTRY" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PLANTYPE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CURRENCY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CHARGESTYPE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="VALUE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TALK_VALUE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PERMINCHARGES" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VALIDITY_DAYS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="COUNTRY_FROM" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="COUNTRY_TO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="A" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="B" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="C" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="D" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="Inventory_MVC2Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ADDTARIFs" EntityType="Self.ADDTARIF" />
+          <FunctionImport Name="mayank" ReturnType="Collection(Inventory_MVC2Model.mayank_Result)">
+          <Parameter Name="sp" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="mayank_Result">
+          <Property Type="Int64" Name="SNO" Nullable="false" />
+          <Property Type="String" Name="TARIFF_CODE" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="COUNTRY" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="PLANTYPE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CURRENCY" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CHARGESTYPE" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="VALUE" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TALK_VALUE" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="PERMINCHARGES" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="VALIDITY_DAYS" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="COUNTRY_FROM" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="COUNTRY_TO" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="A" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="B" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="C" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="D" Nullable="true" MaxLength="200" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Inventory_MVC2ModelStoreContainer" CdmEntityContainer="Inventory_MVC2Entities1">
+          <EntitySetMapping Name="ADDTARIFs">
+            <EntityTypeMapping TypeName="Inventory_MVC2Model.ADDTARIF">
+              <MappingFragment StoreEntitySet="ADDTARIF">
+                <ScalarProperty Name="SNO" ColumnName="SNO" />
+                <ScalarProperty Name="TARIFF_CODE" ColumnName="TARIFF_CODE" />
+                <ScalarProperty Name="COUNTRY" ColumnName="COUNTRY" />
+                <ScalarProperty Name="PLANTYPE" ColumnName="PLANTYPE" />
+                <ScalarProperty Name="CURRENCY" ColumnName="CURRENCY" />
+                <ScalarProperty Name="CHARGESTYPE" ColumnName="CHARGESTYPE" />
+                <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+                <ScalarProperty Name="TALK_VALUE" ColumnName="TALK_VALUE" />
+                <ScalarProperty Name="PERMINCHARGES" ColumnName="PERMINCHARGES" />
+                <ScalarProperty Name="VALIDITY_DAYS" ColumnName="VALIDITY_DAYS" />
+                <ScalarProperty Name="COUNTRY_FROM" ColumnName="COUNTRY_FROM" />
+                <ScalarProperty Name="COUNTRY_TO" ColumnName="COUNTRY_TO" />
+                <ScalarProperty Name="A" ColumnName="A" />
+                <ScalarProperty Name="B" ColumnName="B" />
+                <ScalarProperty Name="C" ColumnName="C" />
+                <ScalarProperty Name="D" ColumnName="D" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="mayank" FunctionName="Inventory_MVC2Model.Store.mayank">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Inventory_MVC2Model.mayank_Result">
+                <ScalarProperty Name="SNO" ColumnName="SNO" />
+                <ScalarProperty Name="TARIFF_CODE" ColumnName="TARIFF_CODE" />
+                <ScalarProperty Name="COUNTRY" ColumnName="COUNTRY" />
+                <ScalarProperty Name="PLANTYPE" ColumnName="PLANTYPE" />
+                <ScalarProperty Name="CURRENCY" ColumnName="CURRENCY" />
+                <ScalarProperty Name="CHARGESTYPE" ColumnName="CHARGESTYPE" />
+                <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+                <ScalarProperty Name="TALK_VALUE" ColumnName="TALK_VALUE" />
+                <ScalarProperty Name="PERMINCHARGES" ColumnName="PERMINCHARGES" />
+                <ScalarProperty Name="VALIDITY_DAYS" ColumnName="VALIDITY_DAYS" />
+                <ScalarProperty Name="COUNTRY_FROM" ColumnName="COUNTRY_FROM" />
+                <ScalarProperty Name="COUNTRY_TO" ColumnName="COUNTRY_TO" />
+                <ScalarProperty Name="A" ColumnName="A" />
+                <ScalarProperty Name="B" ColumnName="B" />
+                <ScalarProperty Name="C" ColumnName="C" />
+                <ScalarProperty Name="D" ColumnName="D" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

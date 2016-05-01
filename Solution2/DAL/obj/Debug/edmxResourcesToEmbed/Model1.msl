@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Inventory_MVC2ModelStoreContainer" CdmEntityContainer="Inventory_MVC2Entities1">
+    <EntitySetMapping Name="ADDTARIFs">
+      <EntityTypeMapping TypeName="Inventory_MVC2Model.ADDTARIF">
+        <MappingFragment StoreEntitySet="ADDTARIF">
+          <ScalarProperty Name="SNO" ColumnName="SNO" />
+          <ScalarProperty Name="TARIFF_CODE" ColumnName="TARIFF_CODE" />
+          <ScalarProperty Name="COUNTRY" ColumnName="COUNTRY" />
+          <ScalarProperty Name="PLANTYPE" ColumnName="PLANTYPE" />
+          <ScalarProperty Name="CURRENCY" ColumnName="CURRENCY" />
+          <ScalarProperty Name="CHARGESTYPE" ColumnName="CHARGESTYPE" />
+          <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+          <ScalarProperty Name="TALK_VALUE" ColumnName="TALK_VALUE" />
+          <ScalarProperty Name="PERMINCHARGES" ColumnName="PERMINCHARGES" />
+          <ScalarProperty Name="VALIDITY_DAYS" ColumnName="VALIDITY_DAYS" />
+          <ScalarProperty Name="COUNTRY_FROM" ColumnName="COUNTRY_FROM" />
+          <ScalarProperty Name="COUNTRY_TO" ColumnName="COUNTRY_TO" />
+          <ScalarProperty Name="A" ColumnName="A" />
+          <ScalarProperty Name="B" ColumnName="B" />
+          <ScalarProperty Name="C" ColumnName="C" />
+          <ScalarProperty Name="D" ColumnName="D" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="mayank" FunctionName="Inventory_MVC2Model.Store.mayank">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Inventory_MVC2Model.mayank_Result">
+          <ScalarProperty Name="SNO" ColumnName="SNO" />
+          <ScalarProperty Name="TARIFF_CODE" ColumnName="TARIFF_CODE" />
+          <ScalarProperty Name="COUNTRY" ColumnName="COUNTRY" />
+          <ScalarProperty Name="PLANTYPE" ColumnName="PLANTYPE" />
+          <ScalarProperty Name="CURRENCY" ColumnName="CURRENCY" />
+          <ScalarProperty Name="CHARGESTYPE" ColumnName="CHARGESTYPE" />
+          <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+          <ScalarProperty Name="TALK_VALUE" ColumnName="TALK_VALUE" />
+          <ScalarProperty Name="PERMINCHARGES" ColumnName="PERMINCHARGES" />
+          <ScalarProperty Name="VALIDITY_DAYS" ColumnName="VALIDITY_DAYS" />
+          <ScalarProperty Name="COUNTRY_FROM" ColumnName="COUNTRY_FROM" />
+          <ScalarProperty Name="COUNTRY_TO" ColumnName="COUNTRY_TO" />
+          <ScalarProperty Name="A" ColumnName="A" />
+          <ScalarProperty Name="B" ColumnName="B" />
+          <ScalarProperty Name="C" ColumnName="C" />
+          <ScalarProperty Name="D" ColumnName="D" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,518 @@
+============== Create folder (GenericRepository) ----------in (interface IRepository<T>    , and   class Repository<T>  ------------
+-----  interface IRepository----------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data.Entity.Infrastructure;
+using System.Threading.Tasks;
+
+
+
+namespace MvcApplication13.GenericRepository
+{
+    public interface IRepository<T> where T : class
+    {
+        IEnumerable<T> GetAll();
+        T GetById(object Id);
+        void Insert(T obj);
+        void Update(T obj);
+        void Delete(Object Id);
+        void Save();
+        List<T> SQLQuery<T>(string sql, params object[] parameters);
+    }
+}
+===============  class Repository -----------------------------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Web;
+
+namespace MvcApplication13.GenericRepository
+{
+
+    public class Repository<T> : IRepository<T> where T : class
+    {
+
+        private Inventory_MVC2Entities db;
+        private DbSet<T> dbSet;
+
+        public Repository()
+        {
+            db = new Inventory_MVC2Entities();
+            dbSet = db.Set<T>();
+        }
+        public IEnumerable<T> GetAll()
+        {
+            return dbSet.ToList();
+        }
+
+        public T GetById(object Id)
+        {
+            return dbSet.Find(Id);
+        }
+        public void Insert(T obj)
+        {
+            dbSet.Add(obj);
+        }
+        public void Update(T obj)
+        {
+            db.Entry(obj).State = EntityState.Modified;
+        }
+        public void Delete(object Id)
+        {
+            T getObjById = dbSet.Find(Id);
+            dbSet.Remove(getObjById);
+        }
+        public void Save()
+        {
+            db.SaveChanges();
+        }
+      public List<T> SQLQuery<T>(string sql, params object[] parameters)
+        {
+
+         //   List<T> b = db.Database.SqlQuery<T>(
+         //sql, parameters).ToList<T>();
+           
+            return db.Database.SqlQuery<T>(sql, parameters).ToList<T>();
+        }
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (this.db != null)
+                {
+                    this.db.Dispose();
+                    this.db = null;
+                }
+            }
+        }
+
+
+    }  
+}
+
+---------------------------------- Controller (   spController ) ------------------------------------------------------------------------------------------
+using MvcApplication13.GenericRepository;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace MvcApplication13.Controllers
+{
+    public class spController : Controller
+    {
+        //
+        // GET: /sp/
+
+        private IRepository<nodej> _repository = null;
+        public spController()  
+        {
+            this._repository = new Repository<nodej>();  
+        }
+
+        public ActionResult Index()
+        {
+            
+            
+            return View();
+        }
+
+
+        [OutputCache(Duration = 0)]
+        [AcceptVerbs(HttpVerbs.Get)]
+        public JsonResult getAlll()
+        {
+            var employees = _repository.GetAll();
+            return Json(employees, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public JsonResult Create(nodej employee)
+        {
+            if (ModelState.IsValid)
+            {
+                _repository.Insert(employee);
+                _repository.Save();
+                var employees = _repository.GetAll();
+                return Json(employees, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var employees = _repository.GetAll();
+                return Json(employees, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [OutputCache(Duration = 0)]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult DeleteConfirmed(int Id)
+        {
+            
+            var employee = _repository.GetById(Id);
+            _repository.Delete(Id);
+            _repository.Save();
+            var employees = _repository.GetAll();
+            return Json(employees, JsonRequestBehavior.AllowGet);
+        }
+
+
+================================================================
+
+        [OutputCache(Duration = 0)]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult Edit(nodej employee)
+        {
+            if (ModelState.IsValid)
+            {
+                _repository.Update(employee);
+                _repository.Save();
+                var employees = _repository.GetAll();
+                return Json(employees, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var employees = _repository.GetAll();
+                return Json(employees, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+          [OutputCache(Duration = 0)]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult StorProc()
+        {
+
+ long a = 0;
+          SqlParameter sp = new SqlParameter("sp", "e");
+          var idParam = new SqlParameter
+          {
+              ParameterName = "sp",
+              Value = 18
+          };
+
+          object[] parameters = new object[] { idParam };
+       // df.SQLQuery<mayank_Result>("exec mayank @sp ", parameters);
+
+          var employees = _repository.SQLQuery<mayank_Result>("exec mayank @sp ", parameters);
+          foreach (mayank_Result cs in employees)
+          {
+              a = cs.SNO;
+          }
+
+     }
+
+       
+===================================
+
+       
+
+    }
+}
+-----------------View  -------------------------------------------------------------------------------------------------------------------------------
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', ['$scope', '$http', function ($scope, $http) {
+
+
+
+        $scope.model = [];
+        $scope.Status = {
+            Showform: false
+        };
+
+
+        //====================================================================All Recor Get 
+        
+        $http.get('/sp/getAlll').success(function (data) {
+            debugger;
+            // var v=data.Employees[2];
+
+            $scope.model = data;
+        });
+        $scope.ShowForm = function (IsTrue) {
+            $scope.Status.Showform = IsTrue;
+        };
+
+        $scope.new =
+            {
+                Emp: {}
+            };
+        //==================================================== Save new Recor
+        $scope.SaveRecord = function () {
+
+            $http.post("/sp/Create", $scope.new.Emp).success(function (data) {
+                $scope.model = data;
+                $scope.ShowForm(false);
+                $scope.new.Emp = {};
+            });
+        };
+        //=============================================================Update
+        $scope.UpdateRecord = function (record) {
+            var id = record.MOBILENO;
+            
+            $http.post("/sp/Edit", record).success(function (data) {
+                debugger;
+                //  $scope.model = data;
+                //  $scope.ShowForm(false);
+                //  $scope.new.Emp = {};
+
+                alert("Saved Successfully!!");
+                record.editMode = false;
+                $scope.loading = false;
+
+
+
+            }).error(function (data) {
+                $scope.error = "An Error has occured while Saving customer! " + data;
+                $scope.loading = false;
+            });
+        };
+
+        //====================================================================All Delete 
+        $scope.DeleteRecord = function (data) {
+            var Id = data.MOBILENO;
+            debugger;
+
+            $scope.loading = true;
+            //  var Id = this.data.MOBILENO;
+            
+            $http.post("/sp/DeleteConfirmed", {Id:Id}).success(function (data) {
+                alert("Deleted Successfully!!");
+                $.each($scope.model, function (i) {
+                    if ($scope.model[i].MOBILENO === Id) {
+                        $scope.model.splice(i, 1);
+                        return false;
+                    }
+                });
+                $scope.loading = false;
+                // $scope.model = data;
+            }).error(function (data) {
+                $scope.error = "An Error has occured while Saving Customer! " + data;
+                $scope.loading = false;
+            });
+        };
+        //=================================================================================================
+        // $scope.friend.editMode = false;
+        $scope.loading = true;
+        $scope.addMode = false;
+
+        //======================================================Edit ===============
+        $scope.toggleEdit = function () {
+            debugger;
+            this.item.editMode = !this.item.editMode
+
+        }
+        //======================================================================= Short
+        //$scope.sort = function (keyname) {
+        //    debugger;
+        //    $scope.sortKey = keyname;   //set the sortKey to the param passed
+        //    $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+        //}
+        $scope.sort = function (keyname) {
+            $scope.sortKey = keyname;   //set the sortKey to the param passed
+            $scope.reverse = !$scope.reverse; //if true make it false and vice versa
+        }
+        ///////////////////
+
+
+
+        $scope.EditRecord = function (data) {
+            debugger;
+            $scope.editname = data.FirstName;
+            $scope.lastname = data.LastName;
+            $scope.midilename = data.MIDILENAME;
+            $scope.data = data.EMAIL;
+            $scope.mobileno = data.MOBILENO;
+            $scope.fathername = data.FATHERNAME
+
+
+        };
+    }]);
+</script>
+
+</head>
+<body>
+    <div>
+        <h1>dddddddd</h1>
+        <div ng-app="myApp" ng-controller="myCtrl">
+   <table class="table">
+                   
+
+
+                    	<thead>
+						<tr>
+							<th ng-click="sort('FirstName')">FirstName
+								<span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+							</th>
+							<th ng-click="sort('LastName')">LastName
+								<span class="glyphicon sort-icon" ng-show="sortKey=='first_name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+							</th>
+							<th ng-click="sort('MIDILENAME')">MIDILENAME
+								<span class="glyphicon sort-icon" ng-show="sortKey=='last_name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+							</th>
+							<th ng-click="sort('EMAIL')">EMAI
+								<span class="glyphicon sort-icon" ng-show="sortKey=='hobby'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+							</th>
+                            <th ng-click="sort('MOBILENO')">MOBILENO
+								<span class="glyphicon sort-icon" ng-show="sortKey=='hobby'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+							</th>
+                            <th ng-click="sort('FATHERNAME')">FATHERNAME
+								<span class="glyphicon sort-icon" ng-show="sortKey=='hobby'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+							</th>
+						</tr>
+					</thead>
+
+
+ 
+                        
+                     <tr ng-repeat="item in model   ">
+
+                        <td><p ng-hide="item.editMode">{{item.FirstName}}</p>
+                             <input ng-show="item.editMode" ng-model="item.FirstName"  type="text"  />
+                        </td>
+                        <td><p ng-hide="item.editMode">{{item.LastName }}</p>
+                            <input ng-show="item.editMode" type="text" ng-model="item.LastName" /> 
+                        </td>
+                        <td><p ng-hide="item.editMode">{{item.MIDILENAME}}
+                                <input ng-show="item.editMode" type="text" ng-model="item.MIDILENAME" />
+                            </p>
+
+                        </td>
+                        <td><p ng-hide="item.editMode">{{item.EMAIL}}</p>
+                          <input ng-show="item.editMode" type="text" ng-model="item.EMAIL" />
+                        </td>
+                          <td><p >{{item.MOBILENO}}</p>
+                              
+                          </td>
+                          <td><p ng-hide="item.editMode">{{item.FATHERNAME}}</p>
+                                <input ng-show="item.editMode" type="text" ng-model="item.FATHERNAME" />
+                          </td>
+                        <td><input type="button" ng-hide="item.editMode" class="btn btn-danger" value="Delete" ng-click="DeleteRecord(item)" />
+                            <input type="button"  ng-click="UpdateRecord(item)" ng-show="item.editMode" class="btn btn-primary" value="Save"  />
+                        </td>
+                          <td><input type="button" ng-hide="item.editMode"   data-ng-click="toggleEdit(item)"  class="btn btn-primary" value="Edit"  />
+                        <input type="button" ng-show="item.editMode" data-ng-click="toggleEdit(item)"    class="btn btn-default" value="Cancel"  />
+                          </td>
+                          </tr>
+                    
+
+                      
+
+
+
+
+
+
+
+
+                    <tr ng-if="Status.Showform">
+                      <td>
+                            <input placeholder="Enter Id" ng-model="new.Emp.FirstName" />
+                        </td>
+             
+                        <td>
+                            <input placeholder="Enter Name" ng-model="new.Emp.LastName" />
+                        </td>
+                        <td>
+                            <input placeholder="Enter Salary" ng-model="new.Emp.MIDILENAME" />
+                        </td>
+                        <td>
+                            <input placeholder="Enter DptId" ng-model="new.Emp.EMAIL" />
+                        </td>
+                        <td>
+                            <input placeholder="Enter DptId" ng-model="new.Emp.MOBILENO" />
+                        </td>
+                        <td>
+                            <input placeholder="Enter DptId" ng-model="new.Emp.FATHERNAME" />
+                        </td>
+                        <td><input type="button" class="btn btn-primary" value="Save" ng-click="SaveRecord()" />
+                      
+
+                        </td>
+                        <td><input type="button" class="btn btn-default" value="Cancel" ng-click="ShowForm(false)" /></td>
+                    </tr>
+
+
+
+
+
+                    <tbody ng-show="true">
+	<tr>
+		<td colspan="2" class="text-center">Loading ... </td>
+	</tr>
+	</tbody>
+	<tfoot>
+	<tr>
+		<td class="text-center" st-pagination="2" st-items-by-page="3" colspan="2">
+		</td>
+	</tr>
+	</tfoot>
+
+
+
+
+                </table>
+              <p><input type="button" class="btn btn-primary" value="Add New" ng-click="ShowForm(true)" /></p>
+                <input type="text" />
+            <br />
+            <input type="button" ng-click=" UpdateRecord()" value="upload" />
+
+
+</div>
+    </div>
+</body>
+</html>
+
+</html>
+
+
+======================Module --------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace MvcApplication13.Models
+{
+    #region User Model...
+    public class UserModule
+    {
+        #region Automated Properties
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string MIDILENAME { get; set; }
+        public string EMAIL { get; set; }
+        public int MOBILENO { get; set; }
+        public string FATHERNAME { get; set; }
+      
+        #endregion
+    }
+    #endregion
+}
+-------------------------
